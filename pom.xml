@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.14</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath />
 	</parent>
-	<groupId>com.lumen</groupId>
-	<artifactId>fastivr-backend-service</artifactId>
+	<groupId>com.code.test</groupId>
+	<artifactId>test-userRegistration</artifactId>
 	<version>1.0.0</version>
-	<name>fastivr-backend-service</name>
+	<name>test-userRegistration</name>
 	<packaging>jar</packaging>
-	<description>Backend Java service for FASTIVR to integrate with Genesys IVR Call flow</description>
+	<description>Backend Java service for userRegistration</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.maxmind.geoip2</groupId>
+			<artifactId>geoip2</artifactId>
+			<version>2.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -58,31 +56,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-
-		<!-- Java EE jars were discarded in Java 11 -->
-		<dependency>
-			<groupId>com.sun.activation</groupId>
-			<artifactId>jakarta.activation</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-
-		<!-- JAXB (java.xml.bind) -->
-
-		<!-- API -->
-		<dependency>
-			<groupId>jakarta.xml.bind</groupId>
-			<artifactId>jakarta.xml.bind-api</artifactId>
-			<version>2.3.3</version>
-		</dependency>
-
-		<!-- Runtime -->
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>2.3.3</version>
-			<scope>runtime</scope>
-		</dependency>
-
 		<!-- Alternative runtime -->
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
@@ -119,151 +92,6 @@
 			<artifactId>jacoco-maven-plugin</artifactId>
 			<version>0.8.7</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
-		<!-- <dependency> <groupId>jakarta.validation</groupId> <artifactId>jakarta.validation-api</artifactId> 
-			<version>3.0.2</version> </dependency> -->
-
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.10.1</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.maxmind.geoip2/geoip2 -->
-		<dependency>
-			<groupId>com.maxmind.geoip2</groupId>
-			<artifactId>geoip2</artifactId>
-			<version>2.7.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-
 	</dependencies>
-
-	<!-- Third Party Repositories - CTL -->
-	<repositories>
-		<repository>
-			<id>ctl.nexus.thirdparty</id>
-			<name>CenturyLink Nexus Repository - Thirdparty Releases</name>
-			<url>http://nexus.corp.intranet/nexus/content/repositories/thirdparty/</url>
-		</repository>
-	</repositories>
-
-	<distributionManagement>
-		<repository>
-			<id>nexus</id>
-			<name>Releases</name>
-			<url>https://nexusprod.corp.intranet:8443/repository/maven-releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>nexus</id>
-			<name>Snapshot</name>
-			<url>https://nexusprod.corp.intranet:8443/repository/maven-snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>com.lumen.fastivr.FastivrBackendServiceApplication</mainClass>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-			<!-- <plugin>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-codegen-plugin</artifactId>
-				<version>3.4.2</version>
-				<executions>
-					<execution>
-						<id>generate-sources</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>wsdl2java</goal>
-						</goals>
-						<configuration>
-							<sourceRoot>${basedir}/src/main/java</sourceRoot>
-							<wsdlOptions>
-								<wsdlOption>
-									<wsdl>${basedir}/src/main/resources/wsdl/MDataChannelFactory.wsdl</wsdl>
-									<extraargs>
-										<extraarg>-b</extraarg>
-										<extraarg>${basedir}/jaxb-bindings.xml</extraarg>
-									</extraargs>
-								</wsdlOption>
-								<wsdlOption>
-									<wsdl>${basedir}/src/main/resources/wsdl/MLTUser.wsdl</wsdl>
-									<extraargs>
-										<extraarg>-b</extraarg>
-										<extraarg>${basedir}/jaxb-bindings.xml</extraarg>
-									</extraargs>
-								</wsdlOption>
-								<wsdlOption>
-									<wsdl>${basedir}/src/main/resources/wsdl/TestRequestAPI.wsdl</wsdl>
-									<extraargs>
-										<extraarg>-b</extraarg>
-										<extraarg>${basedir}/jaxb-bindings.xml</extraarg>
-									</extraargs>
-								</wsdlOption>
-							</wsdlOptions>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.7</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<excludes>
-						<exclude>com/lumen/fastivr/IVRDto/**</exclude>
-						<exclude>com/lumen/fastivr/IVREndpointSecurity/userDetails/IVREndpointUserDetails.java</exclude>
-						<exclude>com/lumen/fastivr/IVREndpointSecurity/config/**</exclude>
-						<exclude>com/lumen/fastivr/IVREndpointSecurity/token/**</exclude>
-						<exclude>com/lumen/fastivr/IVRMLT/**</exclude>
-						<exclude>com/lumen/fastivr/IVRCNF/Dto/**</exclude>
-						
-						<exclude>com/lumen/fastivr/IVRChangeStatusCablePair/**</exclude>
-						<exclude>com/lumen/fastivr/IVRConstruction/**</exclude>
-						<exclude>com/lumen/fastivr/IVRCNF/service/**</exclude>
-						<exclude>com/lumen/fastivr/IVRCNF/helper/**</exclude>
-						<exclude>com/lumen/fastivr/IVRCANST/service/**</exclude>
-						<exclude>com/lumen/fastivr/IVRAppPropertyLoader/**</exclude>
-						<exclude>tollgrade/loopcare/**</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
